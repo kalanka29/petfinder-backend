@@ -18,15 +18,14 @@ public class Swagger2Config {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors
-//                        .basePackage("net.guides.springboot2.springboot2swagger2.controller"))
                         .basePackage("com.example.petfinder.controller"))
                 .paths(PathSelectors.regex("/.*"))
                 .build().apiInfo(apiEndPointsInfo());
     }
     private ApiInfo apiEndPointsInfo() {
         return new ApiInfoBuilder().title("Spring Boot REST API")
-                .description("Employee Management REST API")
-                .contact(new Contact("Kalanka Siyambalapitiya", "www.javaguides.net", "ramesh24fadatare@gmail.com"))
+                .description("Pet Finder API")
+                .contact(new Contact("Kalanka Siyambalapitiya", "https://github.com/kalanka29", "donkalanka@gmail.com"))
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .version("1.0.0")
