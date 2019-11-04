@@ -1,5 +1,7 @@
-package com.example.petfinder.modules.cat;
+package com.example.petfinder.models;
 
+
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Cat{
+@ApiModel(description = "All details about the Dog ")
+public class Dog {
     private int id;
     private String name;
     private String type;
@@ -22,4 +25,4 @@ public class Cat{
     private String gender;
     private String size;
     private String behaviour;
-}
+} // class
