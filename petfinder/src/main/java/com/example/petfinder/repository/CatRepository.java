@@ -1,7 +1,8 @@
-package com.example.petfinder.modules.cat;
+package com.example.petfinder.repository;
 
+
+import com.example.petfinder.models.Cat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,10 +17,9 @@ import java.util.Map;
 public class CatRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-//    @Qualifier("fixed-enterprise-named-param-jdbc")
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     private String type = "cat";
@@ -50,8 +50,6 @@ public class CatRepository {
         Map<String,String> queryparams = new HashMap<>();
         queryparams.put("id",id);
         queryparams.put("type",type);
-
-
 
         String sql = "select * from animals where type= :type and id= :id";
 
@@ -87,9 +85,12 @@ public class CatRepository {
             sql.append(" and behaviour = :behaviour");
         } if(StringUtils.hasText(parameter.get("breed"))){
             sql.append(" and breed = :breed");
-        } if(StringUtils.hasText(parameter.get("location"))){
+        } if(StringUtils.hasText(parameter.get("size"))){
             sql.append(" and size = :size");
+        }if(StringUtils.hasText(parameter.get("name"))){
+            sql.append(" and name = :name");
         }
+
 
         return this.namedParameterJdbcTemplate.query(sql.toString(),parameter,( rs, rowNum)-> {
             Cat cat = new Cat();

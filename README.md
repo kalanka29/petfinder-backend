@@ -7,3 +7,8 @@ mvn clean install -DskipTests
 
 
 mvn spring-boot:run
+
+
+
+# Swagger Doc
+http://localhost:4001/swagger-ui.html#/

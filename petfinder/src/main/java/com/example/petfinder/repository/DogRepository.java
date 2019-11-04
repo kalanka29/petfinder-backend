@@ -1,6 +1,7 @@
-package com.example.petfinder.modules.dog;
+package com.example.petfinder.repository;
 
-import com.example.petfinder.modules.dog.Dog;
+
+import com.example.petfinder.models.Dog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class DogRepository {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
 //    @Qualifier("fixed-enterprise-named-param-jdbc")
@@ -50,8 +51,6 @@ public class DogRepository {
         Map<String,String> queryparams = new HashMap<>();
         queryparams.put("id",id);
         queryparams.put("type",type);
-
-
 
         String sql = "select * from animals where type= :type and id= :id";
 
@@ -89,6 +88,8 @@ public class DogRepository {
             sql.append(" and breed = :breed");
         } if(StringUtils.hasText(parameter.get("size"))){
             sql.append(" and size = :size");
+        }if(StringUtils.hasText(parameter.get("name"))){
+            sql.append(" and name = :name");
         }
 
         return this.namedParameterJdbcTemplate.query(sql.toString(),parameter,( rs, rowNum)-> {
